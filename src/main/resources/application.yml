@@ -1,0 +1,296 @@
+## spring
+spring:
+  application:
+    name: matcheasy
+  security:
+    user:
+      name: admin
+      password: ENC(cn66zHDpMK6qy0g1sN2lqw0MTO2i7rRkIAK8J6aKbhI9mxb1gi86x9RYRNSuNxZo)
+  banner:
+    charset: UTF-8
+  messages:
+    encoding: UTF-8
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: false
+  main:
+    allow-bean-definition-overriding: true
+  # cglib代理
+  aop:
+    auto: true
+    proxy-target-class: true
+  # 全局日期格式化
+  jackson:
+    # 时区，默认为格林尼治时间，即少8小时要+8
+    time-zone: GMT+8
+    # 时间格式转换定义
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template-location: true
+    content-type: text/html
+    mode: HTML
+    encoding: utf-8
+    # 需要热部署时，需要设置为false
+    cache: false
+  jta:
+    # 启用JTA分布式事务
+    enabled: true
+    log-dir: classpath:tx-logs
+    transaction-manager-id: jtaManager
+  datasource:
+    druid:
+      type: com.alibaba.druid.pool.xa.DruidXADataSource
+      # 数据库驱动
+      driverClassName: com.mysql.cj.jdbc.Driver
+      # 初始化物理连接数,初始化发生在显示调用init方法或者第一次getConnection时
+      initialSize: 3
+      # 最小连接池数量
+      minIdle: 3
+      # 最大连接池数量
+      maxActive: 10
+      # 获取连接时最大等待时间，单位毫秒,配置了maxWait之后，缺省启用公平锁，并发效率会有所下降
+      maxWait: 6000
+      # 通过配置useUnfairLock属性为true使用非公平锁
+      useUnfairLock: true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 30000
+      # 是否缓存preparedStatement，即PSCache
+      poolPreparedStatements: true
+      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true
+      maxOpenPreparedStatements: 10
+      # 每个连接最多缓存多少个SQL
+      maxPoolPreparedStatementPerConnectionSize: 10
+      # 配置检测连接是否有效,如果为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用
+      validationQuery: SELECT 1 FROM DUAL
+      # 检测连接查询超时时间
+      validationQueryTimeout: 10000
+      # 申请连接的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMillis 执行validationQuery检测连接是否有效
+      testWhileIdle: true
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnBorrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnReturn: false
+      # 是否自动回收超时连接
+      removeAbandoned: false
+      # 当druid强制回收连接后，是否将stack trace 记录到日志中
+      logAbandoned: true
+      # 监控统计用的filter:stat ,日志用的filter:slf4j ,防御sql注入的filter:wall
+      filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+  cache:
+    type: redis
+    redis:
+      # 设置缓存失效时间，0或者默认为永远不失效
+      #time-to-live: 0
+      # 开启前缀,默以为true
+      use-key-prefix: true
+      # 键的前缀,默认就是缓存名cacheName
+      #key-prefix: REDIS_CACHE
+      # 是否缓存空结果,防止缓存穿透,默以为true
+      cache-null-values: true
+  redis:
+    # 16分片,默认0
+    database: 0
+    # 连接超时时间
+    timeout: 30000ms
+    # 可不设置连接池
+    lettuce:
+      pool:
+        # 最小空闲连接数 默认0
+        min-idle: 0
+        # 最大空闲连接数 默认8
+        max-idle: 8
+        # 最大活跃连接数 默认8（使用负值表示没有限制）
+        max-active: 3
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1ms
+      shutdown-timeout: 6000ms
+  mail:
+    host: smtp.163.com
+    port: 465
+    sender: JING
+    username: jingjingwang3313@163.com
+    password: BIQGUBFEFBQRFYUB
+    default-encoding: UTF-8
+    properties.mail.smtp:
+      timeout: 30000
+      auth: true
+      socketFactory.class: javax.net.ssl.SSLSocketFactory
+      starttls.enable: true
+      starttls.required: true
+
+## server
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 100
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 10
+  servlet:
+    context-path: /
+    encoding.charset: UTF-8
+    encoding.enabled: true
+    encoding.force: true
+  shutdown: graceful
+
+## mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  # 实体扫描,多个package用逗号或者分号分隔
+  typeAliasesPackage: cn.matcheasy.**.entity,cn.matcheasy.**.dto,cn.matcheasy.**.vo
+  global-config:
+    # 数据库相关配置
+    db-config:
+      db-type: mysql
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID", ASSIGN_ID: "雪花算法,默认使用的是该策略"
+      id-type: auto
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      insert-strategy: ignored
+      select-strategy: ignored
+      update-strategy: ignored
+      #驼峰下划线转换
+      table-underline: true
+      #是否开启大写命名，默认不开启
+      capital-mode: false
+      #逻辑删除配置,@TableLogic 注解用于设置逻辑删除属性
+      logic-delete-field: delFlag # 逻辑删除类属性名
+      logic-not-delete-value: 0 # 不删除
+      logic-delete-value: 1 # 删除
+    # 刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    # 设置当查询结果值为null时,同样映射该查询字段给map
+    call-setters-on-nulls: true
+    # 是否开启驼峰转换功能
+    map-underscore-to-camel-case: true
+    # 全局开启或关闭配置文件中的所有映射器已经配置的任何缓存，默认为 true
+    cache-enabled: false
+    #懒加载
+    aggressive-lazy-loading: true
+    # 将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+## virtualPath
+virtualPath: /file/
+
+## loglever
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
+    org.springframework: warn
+    cn.matcheasy: debug
+    cn.matcheasy.**.mapper: debug
+    org.springframework.data.mongodb.core: debug
+
+## threadpool
+project:
+  threadpool:
+    corePoolSize: 3
+    maxPoolSize: 5
+    queueCapacity: 10
+    keepAliveSeconds: 600
+    awaitTerminationSeconds: 300
+
+## swagger2
+swagger2:
+  title: Matcheasy接口文档
+  apiPackage: cn.matcheasy
+  enable: true
+
+## actuator
+management:
+  server:
+    port: 8888
+  #默认只有info/health
+  endpoints:
+    web:
+      exposure:
+        #设置开启哪些端点
+        include: '*'
+        #设置禁用哪些端点
+        #exclude:
+      #自定义管理端点路径, 默认是/actuator
+      base-path: /actuator
+    # false则禁用所有端点
+    #enabled-by-default: true
+  endpoint:
+    health:
+      show-details: always
+    # 可以关闭指定的端点
+    shutdown:
+      enabled: true
+
+## access_token
+access_token:
+  # 令牌密钥(可直接自定义)
+  secret: ENC(cn66zHDpMK6qy0g1sN2lqw0MTO2i7rRkIAK8J6aKbhI9mxb1gi86x9RYRNSuNxZo)
+  # 有效期(单位: 秒)
+  expireTime: 3600
+
+## 验证码过期时间
+verifyCode:
+  # 有效期(单位: 秒)
+  expireTime: 120
+
+# 配置yml加密密钥
+jasypt:
+  encryptor:
+    password: 123456
+
+## QPS
+current:
+  limiting:
+    #开启全局限流
+    enabled: false
+    #开启注解限流
+    part-enabled: true
+    #每秒并发量 这里的qps是全局限流开启的时候的值,如果使用注解在注解里设置QPS值
+    qps: 100
+    #开启快速失败,可切换为阻塞
+    fail-fast: true
+    #系统启动保护时间为0
+    initial-delay: 0
+
+## RetrofitHttp
+retrofit:
+  source: matcheasy
+  enable-response-call-adapter: true
+  # 禁用void返回值类型
+  disable-void-return-type: false
+  # 日志打印
+  enable-log: true
+  # 日志打印拦截器
+  logging-interceptor: com.github.lianjiatech.retrofit.spring.boot.interceptor.DefaultLoggingInterceptor
+  # 异常信息格式化器
+  http-exception-message-formatter: com.github.lianjiatech.retrofit.spring.boot.interceptor.DefaultHttpExceptionMessageFormatter
+  # 请求重试拦截器
+  retry-interceptor: com.github.lianjiatech.retrofit.spring.boot.retry.DefaultRetryInterceptor
+  # 连接池配置
+  pool:
+    retrofitPool:
+      max-idle-connections: 3
+      keep-alive-second: 100
+    retrofitPool2:
+      max-idle-connections: 3
+      keep-alive-second: 100

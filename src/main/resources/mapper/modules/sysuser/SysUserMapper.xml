@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.matcheasy.project.modules.sysuser.mapper.SysUserMapper">
+    <resultMap id="sysUserMap" type="cn.matcheasy.project.modules.sysuser.entity.SysUser">
+        <id property="userId" jdbcType="BIGINT" column="user_id"/>
+        <result property="deptId" jdbcType="BIGINT" column="dept_id"/>
+        <result property="loginCode" jdbcType="VARCHAR" column="login_code"/>
+        <result property="password" jdbcType="VARCHAR" column="password"/>
+        <result property="userType" jdbcType="VARCHAR" column="user_type"/>
+        <result property="userName" jdbcType="VARCHAR" column="user_name"/>
+        <result property="email" jdbcType="VARCHAR" column="email"/>
+        <result property="phone" jdbcType="VARCHAR" column="phone"/>
+        <result property="sex" jdbcType="CHAR" column="sex"/>
+        <result property="avatar" jdbcType="VARCHAR" column="avatar"/>
+        <result property="salt" jdbcType="VARCHAR" column="salt"/>
+        <result property="status" jdbcType="CHAR" column="status"/>
+        <result property="lastLoginIp" jdbcType="VARCHAR" column="last_login_ip"/>
+        <result property="lastLoginDate" jdbcType="TIMESTAMP" column="last_login_date"/>
+        <result property="createBy" jdbcType="VARCHAR" column="create_by"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="updateBy" jdbcType="VARCHAR" column="update_by"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <result property="remark" jdbcType="VARCHAR" column="remark"/>
+    </resultMap>
+
+    <select id="selectListPage" parameterType="cn.matcheasy.project.modules.sysuser.entity.SysUser"
+            resultMap="sysUserMap">
+        SELECT * FROM sys_user
+        <where>
+            <if test="sysUser.userId !=null ">
+                and user_id = #{sysUser.userId}
+            </if>
+            <if test="sysUser.deptId !=null ">
+                and dept_id = #{sysUser.deptId}
+            </if>
+            <if test="sysUser.loginCode !=null ">
+                and login_code = #{sysUser.loginCode}
+            </if>
+            <if test="sysUser.password !=null ">
+                and password = #{sysUser.password}
+            </if>
+            <if test="sysUser.userType !=null ">
+                and user_type = #{sysUser.userType}
+            </if>
+            <if test="sysUser.userName !=null ">
+                and user_name = #{sysUser.userName}
+            </if>
+            <if test="sysUser.email !=null ">
+                and email = #{sysUser.email}
+            </if>
+            <if test="sysUser.phone !=null ">
+                and phone = #{sysUser.phone}
+            </if>
+            <if test="sysUser.sex !=null ">
+                and sex = #{sysUser.sex}
+            </if>
+            <if test="sysUser.avatar !=null ">
+                and avatar = #{sysUser.avatar}
+            </if>
+            <if test="sysUser.salt !=null ">
+                and salt = #{sysUser.salt}
+            </if>
+            <if test="sysUser.status !=null ">
+                and status = #{sysUser.status}
+            </if>
+            <if test="sysUser.lastLoginIp !=null ">
+                and last_login_ip = #{sysUser.lastLoginIp}
+            </if>
+            <if test="sysUser.lastLoginDate !=null ">
+                and last_login_date = #{sysUser.lastLoginDate}
+            </if>
+            <if test="sysUser.createBy !=null ">
+                and create_by = #{sysUser.createBy}
+            </if>
+            <if test="sysUser.createTime !=null ">
+                and create_time = #{sysUser.createTime}
+            </if>
+            <if test="sysUser.updateBy !=null ">
+                and update_by = #{sysUser.updateBy}
+            </if>
+            <if test="sysUser.updateTime !=null ">
+                and update_time = #{sysUser.updateTime}
+            </if>
+            <if test="sysUser.remark !=null ">
+                and remark = #{sysUser.remark}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUserPowerByUserId" parameterType="long" resultType="java.util.concurrent.ConcurrentHashMap">
+        SELECT
+            u.user_id,
+            u.user_name,
+            r.role_name role,
+            m.menu_name permission
+        FROM
+            sys_user u
+        LEFT JOIN sys_user_role ur ON ur.user_id = u.user_id
+        LEFT JOIN sys_role r ON r.role_id = ur.role_id
+        LEFT JOIN sys_role_menu rm ON rm.role_id = r.role_id
+        LEFT JOIN sys_menu m ON m.menu_id = rm.menu_id
+        WHERE u.user_id = #{userId}
+        ORDER BY r.role_sort ASC
+    </select>
+
+</mapper>

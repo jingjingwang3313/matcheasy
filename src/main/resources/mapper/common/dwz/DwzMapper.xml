@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.matcheasy.project.common.api.dwz.mapper.DwzMapper">
+
+    <resultMap id="DwzMap" type="cn.matcheasy.project.common.api.dwz.entity.Dwz">
+        <result column="api_code" property="api_code"/>
+        <result column="long_url" property="long_url"/>
+        <result column="short_url" property="short_url"/>
+        <result column="call_count" property="call_count"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="insertDWZ" parameterType="map">
+	  replace into t_dwz(api_code,long_url,short_url,call_count,status,create_time)
+	  values(#{api_code},#{long_url},#{short_url},#{call_count},#{status},now())
+    </insert>
+
+    <select id="selectDwzByCodeOrLongUrl" resultType="map" parameterType="map">
+        SELECT *
+        FROM t_dwz
+        WHERE 1 = 1
+        <if test="api_code !=null and api_code != '' ">
+            AND api_code = #{api_code}
+        </if>
+        <if test="long_url !=null and long_url != '' ">
+            AND long_url = #{long_url}
+        </if>
+        limit 1
+    </select>
+
+    <update id="increaseCallCount" parameterType="map">
+        UPDATE t_dwz
+        SET call_count = (call_count+1)
+        WHERE 1=2
+        <if test="api_code !=null and api_code != '' ">
+            OR api_code = #{api_code}
+        </if>
+    </update>
+
+</mapper>

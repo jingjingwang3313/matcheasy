@@ -1,0 +1,70 @@
+{
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 1,
+    "max_result_window": "1000000"
+  },
+  "mappings": {
+    "_routing": {
+      "required": true
+    },
+    "dynamic_templates": [
+      {
+        "strings": {
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "keyword"
+          }
+        }
+      }
+    ],
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "username": {
+        "type": "keyword"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "gender": {
+        "type": "keyword"
+      },
+      "phone": {
+        "type": "long"
+      },
+      "department": {
+        "type": "keyword"
+      },
+      "createTime": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "updateTime": {
+        "type": "date",
+        "format": "yyyyMMddHHmmssSSS"
+      },
+      "currentDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "salary": {
+        "type": "double"
+      },
+      "details": {
+        "properties": {
+          "itemId": {
+            "type": "keyword"
+          },
+          "price": {
+            "type": "double"
+          },
+          "total": {
+            "type": "long"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+/docs.html
+/doc.html
+/swagger-ui.html
+/favicon.ico
+/v2/**
+/webjars/**
+/swagger-resources/**
+/**/*Nose
+/druid/**
+/dwz/**
+/file/**
+/anon/**

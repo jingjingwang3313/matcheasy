@@ -1,0 +1,115 @@
+## port
+server:
+  port: 80
+
+## uploadpath
+uploadPath: /app/matcheasy/upload/
+imgPath: img/
+otherPath: other/
+tempPath: temp/
+
+## logdir
+log:
+  logdir: /app/matcheasy/log/
+  appname: matcheasy
+  basepackage: cn.matcheasy
+
+## spring
+spring:
+  # mongodb
+  data:
+    mongodb:
+      # mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+      # mongodb4.0以上版本需要验证
+      default:
+        uri: mongodb://root:mongo123@192.168.5.107:27017/demo_gag_base?authsource=admin
+      other:
+        uri: mongodb://root:mongo123@192.168.5.107:27017/demo_gag_base?authsource=admin
+  datasource:
+    # 动态数据源,druid做密码加密 java -cp .\druid-1.2.3.jar  com.alibaba.druid.filter.config.ConfigTools password
+    druid:
+      defaultMaster:
+        url: jdbc:mysql://127.0.0.1:3306/matcheasy?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=UTC
+        username: root
+        password: GaHmgQ+uYi5BcYWgZbL7siZvVbvZMDD8ZeOP0xZvlrGfQHrd6qI0zshHmUgd5vNzzueJodUjwQuNOD4iPDX8pQ==
+        enbleKey: true
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMWaXdc1ac70yCUS74xTqD6yE7zzQ523b4jTGADSiK0GA455tfI0pk8RFKbrYjrOcQ9Df8EDQFnAwx1CeNebpWsCAwEAAQ==
+      defaultCluster:
+        url: jdbc:mysql://127.0.0.1:3306/matcheasy?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=UTC
+        username: root
+        password: GaHmgQ+uYi5BcYWgZbL7siZvVbvZMDD8ZeOP0xZvlrGfQHrd6qI0zshHmUgd5vNzzueJodUjwQuNOD4iPDX8pQ==
+        enbleKey: true
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMWaXdc1ac70yCUS74xTqD6yE7zzQ523b4jTGADSiK0GA455tfI0pk8RFKbrYjrOcQ9Df8EDQFnAwx1CeNebpWsCAwEAAQ==
+      otherMaster:
+        url: jdbc:mysql://127.0.0.1:3306/matcheasy?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=UTC
+        username: root
+        password: GaHmgQ+uYi5BcYWgZbL7siZvVbvZMDD8ZeOP0xZvlrGfQHrd6qI0zshHmUgd5vNzzueJodUjwQuNOD4iPDX8pQ==
+        enbleKey: true
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMWaXdc1ac70yCUS74xTqD6yE7zzQ523b4jTGADSiK0GA455tfI0pk8RFKbrYjrOcQ9Df8EDQFnAwx1CeNebpWsCAwEAAQ==
+      otherCluster:
+        url: jdbc:mysql://127.0.0.1:3306/matcheasy?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=UTC
+        username: root
+        password: GaHmgQ+uYi5BcYWgZbL7siZvVbvZMDD8ZeOP0xZvlrGfQHrd6qI0zshHmUgd5vNzzueJodUjwQuNOD4iPDX8pQ==
+        enbleKey: true
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMWaXdc1ac70yCUS74xTqD6yE7zzQ523b4jTGADSiK0GA455tfI0pk8RFKbrYjrOcQ9Df8EDQFnAwx1CeNebpWsCAwEAAQ==
+  # redis集群(单例)
+  redis:
+    #host: 127.0.0.1
+    #port: 6379
+    #password: ENC(hiQzQpz+cxtPw67zloHUaBZZASZ2VQx/mJ0A+gDokPufEo4Nrfo/dToX0WicdvO3)
+    cluster:
+      nodes:
+        - 192.168.10.251:6379
+        - 192.168.10.251:6380
+        - 192.168.10.251:6381
+        - 192.168.10.251:7379
+        - 192.168.10.251:7380
+        - 192.168.10.251:7381
+      # 获取失败,最大重定向次数
+      max-redirects: 3
+  # 消息队列
+  rabbitmq:
+    host: 192.168.255.11
+    port: 5672
+    username: guest
+    password: ENC(Hvm6ecqsSiwE6UcAKV7De243Y+lL5HCAmkxodJC17i13OFG/BnEHMwxeqgNebW9R)
+    # 确认消息已发送到交换机(Exchange)
+    publisher-confirm-type: correlated
+    # 确认消息已发送到队列(Queue)
+    publisher-returns: true
+## elasticsearch
+elasticsearch:
+  scheme: http
+  clusters: 192.168.5.125:9200,192.168.5.126:9200 #127.0.0.1:9200
+  #hostname:  127.0.0.1
+  #port: 9200
+  connectTimeout: 3000
+  socketTimeout: 3000
+  connectionRequestTimeout: 5000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+  username: elastic
+  password: ENC(2mCVSKB7kgA+kz1jYJJIg8S4srvpBME+ECQCk278GZ861Y/QzGxGsZS3bdul56HA)
+
+## elasticsearch2
+elasticsearch2:
+  scheme: http
+  clusters: 192.168.5.125:9200,192.168.5.126:9200 #127.0.0.1:9200
+  #hostname:  127.0.0.1
+  #port: 9200
+  connectTimeout: 3000
+  socketTimeout: 3000
+  connectionRequestTimeout: 5000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+  username: elastic
+  password: ENC(2mCVSKB7kgA+kz1jYJJIg8S4srvpBME+ECQCk278GZ861Y/QzGxGsZS3bdul56HA)
+
+## RetrofitHttp
+retrofit:
+  access_key: matcheasy
+  access_secret: ENC(cn66zHDpMK6qy0g1sN2lqw0MTO2i7rRkIAK8J6aKbhI9mxb1gi86x9RYRNSuNxZo)
+  # 配置多个服务URL
+  baseUrl:
+    server:  http://127.0.0.1:80
+    server2: http://127.0.0.1:9001

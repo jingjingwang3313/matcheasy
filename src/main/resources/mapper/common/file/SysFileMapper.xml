@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.matcheasy.project.common.api.file.mapper.SysFileMapper">
+    <resultMap id="BaseResultMap" type="cn.matcheasy.project.common.api.file.entity.SysFile">
+        <id column="file_id" jdbcType="BIGINT" property="fileId"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_real_name" jdbcType="VARCHAR" property="fileRealName"/>
+        <result column="access_url" jdbcType="VARCHAR" property="accessUrl"/>
+        <result column="storage_path" jdbcType="VARCHAR" property="storagePath"/>
+        <result column="relative_path" jdbcType="VARCHAR" property="relativePath"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="file_size" jdbcType="BIGINT" property="fileSize"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    file_id, file_name, file_real_name, access_url, storage_path, relative_path, file_type, file_size,
+    status, create_by, create_time
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_file
+        where file_id = #{fileId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_file
+        where file_id = #{fileId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="cn.matcheasy.project.common.api.file.entity.SysFile" useGeneratedKeys="true"
+            keyProperty="fileId" keyColumn="file_id">
+    insert into sys_file (file_id, file_name, file_real_name,
+      access_url, storage_path, relative_path,
+      file_type,file_size, status, create_by,
+      create_time)
+    values (#{fileId,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR}, #{fileRealName,jdbcType=VARCHAR},
+      #{accessUrl,jdbcType=VARCHAR}, #{storagePath,jdbcType=VARCHAR}, #{relativePath,jdbcType=VARCHAR},
+      #{fileType,jdbcType=VARCHAR}, #{fileSize,jdbcType=BIGINT},1, #{createBy,jdbcType=BIGINT},now())
+  </insert>
+    <insert id="insertSelective" parameterType="cn.matcheasy.project.common.api.file.entity.SysFile">
+        insert into sys_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileId != null">
+                file_id,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileRealName != null">
+                file_real_name,
+            </if>
+            <if test="accessUrl != null">
+                access_url,
+            </if>
+            <if test="storagePath != null">
+                storage_path,
+            </if>
+            <if test="relativePath != null">
+                relative_path,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileId != null">
+                #{fileId,jdbcType=BIGINT},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileRealName != null">
+                #{fileRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="accessUrl != null">
+                #{accessUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="storagePath != null">
+                #{storagePath,jdbcType=VARCHAR},
+            </if>
+            <if test="relativePath != null">
+                #{relativePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.matcheasy.project.common.api.file.entity.SysFile">
+        update sys_file
+        <set>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileRealName != null">
+                file_real_name = #{fileRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="accessUrl != null">
+                access_url = #{accessUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="storagePath != null">
+                storage_path = #{storagePath,jdbcType=VARCHAR},
+            </if>
+            <if test="relativePath != null">
+                relative_path = #{relativePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where file_id = #{fileId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.matcheasy.project.common.api.file.entity.SysFile">
+    update sys_file
+    set file_name = #{fileName,jdbcType=VARCHAR},
+      file_real_name = #{fileRealName,jdbcType=VARCHAR},
+      access_url = #{accessUrl,jdbcType=VARCHAR},
+      storage_path = #{storagePath,jdbcType=VARCHAR},
+      relative_path = #{relativePath,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where file_id = #{fileId,jdbcType=BIGINT}
+  </update>
+</mapper>
