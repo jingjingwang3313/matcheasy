@@ -13,7 +13,8 @@ import java.util.List;
  * @desc: TODO
  */
 @Data
-public class Email implements Serializable {
+public class Email implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 
@@ -47,6 +48,11 @@ public class Email implements Serializable {
      */
     private String content;
 
+    /**
+     * 邮件内容(html)
+     */
+    private String htmlContent;
+    
     /**
      * 附件
      */
