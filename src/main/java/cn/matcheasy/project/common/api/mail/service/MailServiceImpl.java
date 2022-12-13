@@ -23,7 +23,8 @@ import java.util.Date;
  */
 @Slf4j
 @Service
-public class MailServiceImpl implements MailService {
+public class MailServiceImpl implements MailService
+{
 
     @Value("${spring.mail.sender}")
     private String sender;
@@ -36,25 +37,39 @@ public class MailServiceImpl implements MailService {
 
     /**
      * handled by wangjing at 2020/11/23/0023 18:09
+     *
      * @desc 发邮件(支持群发)
      */
     @Override
-    public void sendMail(Email email) throws Exception {
+    public void sendMail(Email email) throws Exception
+    {
         long start = System.currentTimeMillis();
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         //true表示需要创建一个multipart message
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setFrom(MimeUtility.encodeText(sender) + " <" + username + ">");
         helper.setTo(email.getToAddress().toArray(new String[email.getToAddress().size()]));
-        if (StringUtils.isEmpty(email.getSubject())) {
+        if (StringUtils.isEmpty(email.getSubject()))
+        {
             helper.setSubject("无主题");
-        } else {
+        }
+        else
+        {
             helper.setSubject(email.getSubject());
         }
-        helper.setText(email.getContent(), true);
+        if (StringUtils.isNotBlank(email.getContent()))
+        {
+            helper.setText(email.getContent());
+        }
+        if (StringUtils.isNotBlank(email.getHtmlContent()))
+        {
+            helper.setText(email.getHtmlContent(), true);
+        }
         helper.setSentDate(new Date());
-        if (null != email.getAttachments() && email.getAttachments().size() > 0) {
-            for (File curFile : email.getAttachments()) {
+        if (null != email.getAttachments() && email.getAttachments().size() > 0)
+        {
+            for (File curFile : email.getAttachments())
+            {
                 FileSystemResource file = new FileSystemResource(curFile);
                 helper.addAttachment(MimeUtility.encodeWord(file.getFilename(), "utf-8", "B"), file);
             }
