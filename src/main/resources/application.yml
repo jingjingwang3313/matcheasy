@@ -127,7 +127,7 @@ spring:
     host: smtp.163.com
     port: 465
     sender: JING
-    username: jingjingwang3313@163.com
+    username: 18340088315@163.com
     password: BIQGUBFEFBQRFYUB
     default-encoding: UTF-8
     properties.mail.smtp:
