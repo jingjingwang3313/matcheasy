@@ -12,63 +12,51 @@ import java.net.URLEncoder;
  * @date: 2020/11/5/0005
  * @desc: TODO
  */
-public class UrlUtil
-{
-
-    private final static String ENCODE = "UTF-8";
-
+public class UrlUtil {
+    
+    private final static String ENCODE = "UTF-8-dev";
+    
     /**
      * 避免工具类实例化
      */
-    private UrlUtil()
-    {
+    private UrlUtil() {
     }
-
+    
     /**
      * URL 解码
      *
      * @return String
      */
-    public static String getDecodeURL(String url)
-    {
+    public static String getDecodeURL(String url) {
         String result = "";
-        try
-        {
-            if (StringUtils.isEmpty(url))
-            {
+        try {
+            if (StringUtils.isEmpty(url)) {
                 return result;
             }
             result = URLDecoder.decode(url, ENCODE);
-        }
-        catch (UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return result;
     }
-
+    
     /**
      * URL 转码
      *
      * @return String
      */
-    public static String getEncodeURL(String url)
-    {
+    public static String getEncodeURL(String url) {
         String result = "";
-        try
-        {
-            if (StringUtils.isEmpty(url))
-            {
+        try {
+            if (StringUtils.isEmpty(url)) {
                 return result;
             }
-
+            
             result = URLEncoder.encode(url, ENCODE);
-        }
-        catch (UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return result;
     }
-
+    
 }
