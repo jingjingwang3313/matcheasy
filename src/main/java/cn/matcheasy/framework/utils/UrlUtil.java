@@ -19,44 +19,55 @@ public class UrlUtil {
     /**
      * 避免工具类实例化
      */
-    private UrlUtil() {
+    private UrlUtil()
+    {
     }
-    
+
     /**
      * URL 解码
      *
      * @return String
      */
-    public static String getDecodeURL(String url) {
+    public static String getDecodeURL(String url)
+    {
         String result = "";
-        try {
-            if (StringUtils.isEmpty(url)) {
+        try
+        {
+            if (StringUtils.isEmpty(url))
+            {
                 return result;
             }
             result = URLDecoder.decode(url, ENCODE);
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e)
+        {
             e.printStackTrace();
         }
         return result;
     }
-    
+
     /**
      * URL 转码
      *
      * @return String
      */
-    public static String getEncodeURL(String url) {
+    public static String getEncodeURL(String url)
+    {
         String result = "";
-        try {
-            if (StringUtils.isEmpty(url)) {
+        try
+        {
+            if (StringUtils.isEmpty(url))
+            {
                 return result;
             }
-            
+
             result = URLEncoder.encode(url, ENCODE);
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e)
+        {
             e.printStackTrace();
         }
         return result;
     }
-    
+
 }
