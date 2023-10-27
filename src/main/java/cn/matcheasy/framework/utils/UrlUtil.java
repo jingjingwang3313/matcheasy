@@ -14,7 +14,7 @@ import java.net.URLEncoder;
  */
 public class UrlUtil {
     
-    private final static String ENCODE = "UTF-8-dev";
+    private final static String ENCODE = "UTF-8";
     
     /**
      * 避免工具类实例化
