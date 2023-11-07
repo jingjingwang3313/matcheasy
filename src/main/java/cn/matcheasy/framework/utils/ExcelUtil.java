@@ -28,13 +28,13 @@ import java.util.Map;
  */
 @Slf4j
 public class ExcelUtil {
-
+    
     /**
      * 避免工具类实例化
      */
     private ExcelUtil() {
     }
-
+    
     /**
      * Handled by wangjing at 2020/12/28/0028 17:04
      *
@@ -46,7 +46,7 @@ public class ExcelUtil {
         List<Map<String, Object>> readAll = excelReader.readAll();
         return readAll;
     }
-
+    
     /**
      * Handled by wangjing at 2020/12/29/0029 13:01
      *
@@ -57,7 +57,7 @@ public class ExcelUtil {
         reader.read(filePath, sheetIndex);// 如果sheetIndex为-1处理所有的sheet,指定sheetIndex则处理指定sheet
         FileUtil.deleteFileOrDirFile(filePath);
     }
-
+    
     public static RowHandler rowHandler() {
         return new RowHandler() {
             @Override
@@ -66,7 +66,7 @@ public class ExcelUtil {
             }
         };
     }
-
+    
     /**
      * Handled by wangjing at 2020/12/28/0028 17:04
      *
@@ -89,7 +89,7 @@ public class ExcelUtil {
         }
         IoUtil.close(out);
     }
-
+    
     /**
      * Handled by wangjing at 2020/12/29/0029 13:01
      *
@@ -112,7 +112,7 @@ public class ExcelUtil {
         }
         IoUtil.close(out);
     }
-
+    
     /**
      * 大数据量Excel导出多个 Sheet 页
      *
@@ -166,7 +166,7 @@ public class ExcelUtil {
         }
         IoUtil.close(out);
     }
-
+    
     public static void main(String[] args) throws Exception {
         XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream("D:/qrcode/test.xlsx"));
         XSSFSheet sheet = null;
@@ -175,7 +175,7 @@ public class ExcelUtil {
             sheet = wb.getSheetAt(i);
             sheetName = sheet.getSheetName();
             log.info("==========" + sheetName + "==========");
-            //根据sheet名称进行sheet导入
+            // 根据sheet名称进行sheet导入
             ExcelReader excelReader = cn.hutool.poi.excel.ExcelUtil.getReader(cn.hutool.core.io.FileUtil.file("D:/qrcode/test.xlsx"), sheetName);
             List<Map<String, Object>> readAll = excelReader.readAll();
             for (int i1 = readAll.size() - 1; i1 >= 0; i1--) {
@@ -191,7 +191,8 @@ public class ExcelUtil {
                 log.info(sheetName + "_" + region + "_" + num + ", " + "生成");
             }
         }
+        FileUtil.zipCompress("D:/", "qrcode.zip", new File("D:/qrcode/main/11111"));
         FileUtil.zipCompress("D:/", "qrcode.zip", new File("D:/qrcode/"));
     }
-
+    
 }
