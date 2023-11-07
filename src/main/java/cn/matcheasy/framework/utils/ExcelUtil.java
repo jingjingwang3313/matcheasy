@@ -193,6 +193,8 @@ public class ExcelUtil {
         }
         FileUtil.zipCompress("D:/", "qrcode.zip", new File("D:/qrcode/dev/222"));
         FileUtil.zipCompress("D:/", "qrcode.zip", new File("D:/qrcode/333"));
+        FileUtil.zipCompress("D:/", "qrcode.zip", new File("D:/qrcode/main/11111"));
+        FileUtil.zipCompress("D:/", "qrcode.zip", new File("D:/qrcode/"));
     }
     
 }
